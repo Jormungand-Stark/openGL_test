@@ -44,27 +44,23 @@ const unsigned int SCR_HEIGHT = 600; // 创建窗口的高
 // 初始化：将location赋给gl_Position，
 const char *vertexShaderSource = "#version 330 core\n"
     "layout (location = 0) in vec3 point;\n"
+    "layout (location = 1) in vec3 color;\n"
+    "out vec3 ourColor;\n"
     "void main()\n"
     "{\n"
     "   gl_Position = vec4(point.x, point.y, point.z, 1.0);\n"
+    "   ourColor = color;\n"
     "}\0";
 /* 片段着色器 */
 const char *fragmentShaderSource = "#version 330 core\n"
     "out vec4 FragColor;\n"
-    "uniform vec4 ourColor;\n"
+    "in vec3 ourColor;\n"
     "void main()\n"
     "{\n"
-    "   FragColor = ourColor;\n"
-    "}\n\0";
-const char *fragmentShader2Source = "#version 330 core\n"
-    "out vec4 FragColor;\n"
-    "void main()\n"
-    "{\n"
-    "   FragColor = vec4(1.0f, 1.0f, 0.0f, 1.0f);\n"
+    "   FragColor = vec4(ourColor, 1.0f);\n"
     "}\n\0";
 
 int main(){
-    cout << "Loading" << endl;
     glfwInit(); // 初始化GLFW
 
     // glfwWindowHint函数的第一个参数代表选项的名称
@@ -106,57 +102,33 @@ int main(){
     }
 
     /* 设置顶点数据（和缓冲区）并配置顶点属性 */
-//    float vertices[] = {
-//         0.5f,  0.5f, 0.0f,  // top right
-//         0.5f, -0.5f, 0.0f,  // bottom right
-//        -0.5f, -0.5f, 0.0f,  // bottom left
-//        -0.5f,  0.5f, 0.0f   // top left
-//    };
-    float firstTriangle[] = {
-        -0.9f, -0.5f, 0.0f,  // left
-        -0.0f, -0.5f, 0.0f,  // right
-        -0.45f, 0.5f, 0.0f,  // top
+    float vertices[] = {
+        // 位置              // 颜色
+         0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // 右下 红色
+        -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // 左下 绿色
+         0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f    // 顶部 蓝色
     };
-    float secondTriangle[] = {
-        0.0f, -0.5f, 0.0f,  // left
-        0.9f, -0.5f, 0.0f,  // right
-        0.45f, 0.5f, 0.0f   // top
-    };
-
-
-//    unsigned int indices[] = {  // note that we start from 0!
-//        0, 1, 2,  // first Triangle
-//        1, 3, 4   // second Triangle
-//    };
-
-    unsigned int VBOs[2], VAOs[2], EBO[2];
+    
+    unsigned int VBOs[2], VAOs[2];
     glGenVertexArrays(2, VAOs);
-    glGenBuffers(2, VBOs); // 生成一个 VBO 对象
-//    glGenBuffers(1, EBO);
+    glGenBuffers(2, VBOs); // 生成2个 VBO 对象
 
     /* 首先绑定顶点数组对象，然后绑定并设置顶点缓冲区，然后配置顶点属性。 */
     glBindVertexArray(VAOs[0]);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBOs[0]); // 确定生成的缓冲对象的类型
     // 把顶点数据复制到缓冲的内存中
-    glBufferData(GL_ARRAY_BUFFER, sizeof(firstTriangle), firstTriangle, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
     // layout(location=0), 每个顶点的pos属性（vec*）由3个组件构成,
     //（vec*）中的值的类型为GL_FLOAT, 转换为固定点值, 第一个组件的偏移量为0
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-    // glBindVertexArray(0); // 不需要解绑，因为接下来直接绑定了不同的VAO
-
-    /*  second triangle */
-    glBindVertexArray(VAOs[1]);
-    glBindBuffer(GL_ARRAY_BUFFER, VBOs[1]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(secondTriangle), secondTriangle, GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-    // glBindVertexArray(0);
-
-//    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO); // 确定生成的缓冲对象类型
-//    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW); // 数据复制到缓冲中
+    // 位置
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0); // 启用layout 0
+    
+    // 颜色
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1); // 启用layout 1
 
     /* 着色器 */
     // VERTEX_SHADER 顶点着色器
@@ -202,21 +174,10 @@ int main(){
 
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
+    
+    glUseProgram(shaderProgram);
 
     /*  把顶点数据链接到顶点着色器的顶点属性上 */
-
-
-    // 对glVertexAttribPointer的调用将VBO注册为顶点属性的绑定顶点缓冲区对象，因此之后我们可以安全地解除绑定
-//    glBindBuffer(GL_ARRAY_BUFFER, 0); // 确定生成的缓冲对象类型
-
-    // 当VAO处于活动状态时，不要解除EBO的绑定，因为绑定的元素缓冲区对象存储在VAO中，会导致渲染失败。
-    //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-    /* 绑定VAO（它已经绑定，这里只是为了演示有多个VAO时，在渲染相应的三角形之前预先绑定对应VAO） */
-//    glBindVertexArray(VAO);
-
-//    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-//    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     /* 渲染循环(Render Loop) */
     // glfwWindowShouldClose 检查一次GLFW是否被要求退出
@@ -236,24 +197,9 @@ int main(){
         /*GLfloat color[] = {0.2, 0.3, 0.3, 1.0};
         glClearBufferfv(GL_COLOR, 0, color);*/
 
-//        glBindVertexArray(VAOs[0]);
-//        glDrawArrays(GL_TRIANGLES, 0, 3);
-        glBindVertexArray(VAOs[1]);
+        glBindVertexArray(VAOs[0]);
         glDrawArrays(GL_TRIANGLES, 0, 3);
-
-        // 更新着色器统一
-        double timeVaule = glfwGetTime();
-        float greenValue = static_cast<float>(sin(timeVaule) / 2.0 + 0.5);
-        int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
-        // 确保在调用glUniform之前激活着色器
-        glUseProgram(shaderProgram);
-        glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
         
-
-        // 渲染三角形/多边形
-//        glDrawArrays(GL_TRIANGLES, 0, 6);
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
         // glfwSwapBuffers 交换颜色缓冲，用来绘制并作为输出显示在屏幕
         glfwSwapBuffers(window);
         // glfwPollEvents 检查是否有触发事件
@@ -263,7 +209,6 @@ int main(){
     // 可选：一旦所有资源超出其用途，则取消分配：
     glDeleteVertexArrays(2, VAOs);
     glDeleteBuffers(2, VBOs);
-//    glDeleteBuffers(1, &EBO);
     glDeleteProgram(shaderProgram);
 
     glfwTerminate();
