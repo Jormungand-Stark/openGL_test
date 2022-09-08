@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D43246D28C9D1E00055F4C1 /* red_green_blue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D43246B28C9D1E00055F4C1 /* red_green_blue.cpp */; };
 		3D4F5DB028BDA38900FC5605 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D4F5DAF28BDA38800FC5605 /* test.cpp */; };
 		3D721BD728B613DF002C8CAF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D721BD628B613DF002C8CAF /* main.cpp */; };
 		3D721CDC28B62F37002C8CAF /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D721CD028B61410002C8CAF /* glad.c */; };
@@ -28,6 +29,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3D43246B28C9D1E00055F4C1 /* red_green_blue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = red_green_blue.cpp; sourceTree = "<group>"; };
 		3D4F5DAF28BDA38800FC5605 /* test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = test.cpp; sourceTree = "<group>"; };
 		3D721BD328B613DF002C8CAF /* OpenGL_Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OpenGL_Test; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D721BD628B613DF002C8CAF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 			children = (
 				3D721BD628B613DF002C8CAF /* main.cpp */,
 				3D4F5DAF28BDA38800FC5605 /* test.cpp */,
+				3D43246B28C9D1E00055F4C1 /* red_green_blue.cpp */,
 			);
 			path = OpenGL_Test;
 			sourceTree = "<group>";
@@ -690,6 +693,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D721CDC28B62F37002C8CAF /* glad.c in Sources */,
+				3D43246D28C9D1E00055F4C1 /* red_green_blue.cpp in Sources */,
 				3D721BD728B613DF002C8CAF /* main.cpp in Sources */,
 				3D4F5DB028BDA38900FC5605 /* test.cpp in Sources */,
 			);
