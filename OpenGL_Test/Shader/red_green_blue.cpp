@@ -8,6 +8,7 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <cmath>
+#include "Shader.h"
 
 using namespace std;
 
@@ -27,8 +28,6 @@ void processInput(GLFWwindow *window)
 {
     // glfwGetKey两个参数：窗口，按键
     // 没有被按下返回 GLFW_PRESS
-    std::cout << "是否点击ESC?" << std::endl;
-    std::cout << glfwGetKey(window, GLFW_KEY_ESCAPE) << std::endl;
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         // 被按下则将 WindowShouldClose 属性置为 true
         // 以便于在关闭 渲染循环
@@ -37,27 +36,6 @@ void processInput(GLFWwindow *window)
 
 const unsigned int SCR_WIDTH = 800; // 创建窗口的宽
 const unsigned int SCR_HEIGHT = 600; // 创建窗口的高
-
-/* 用着色器语言GLSL编写顶点着色器，方便后续动态编译 */
-// gl_Position是一个vec4类型变量，是后续处理顶点着色器输出的关键
-// 初始化：将location赋给gl_Position，
-const char *vertexShaderSource = "#version 330 core\n"
-    "layout (location = 0) in vec3 point;\n"
-    "layout (location = 1) in vec3 color;\n"
-    "out vec3 ourColor;\n"
-    "void main()\n"
-    "{\n"
-    "   gl_Position = vec4(point.x, point.y, point.z, 1.0);\n"
-    "   ourColor = color;\n"
-    "}\0";
-/* 片段着色器 */
-const char *fragmentShaderSource = "#version 330 core\n"
-    "out vec4 FragColor;\n"
-    "in vec3 ourColor;\n"
-    "void main()\n"
-    "{\n"
-    "   FragColor = vec4(ourColor, 1.0f);\n"
-    "}\n\0";
 
 int main(){
     glfwInit(); // 初始化GLFW
@@ -104,10 +82,13 @@ int main(){
     float vertices[] = {
         // 位置              // 颜色
          0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // 右下 红色
-        -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // 左下 绿色
+         -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // 左下 绿色
          0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f    // 顶部 蓝色
     };
-    
+
+    // build and compile our shader program
+    Shader ourShader("3.3.shader.vs", "3.3.shader.fs"); // you can name your shader files however you like
+
     unsigned int VBOs[2], VAOs[2];
     glGenVertexArrays(2, VAOs);
     glGenBuffers(2, VBOs); // 生成2个 VBO 对象
@@ -124,59 +105,10 @@ int main(){
     // 位置
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0); // 启用layout 0
-    
+
     // 颜色
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1); // 启用layout 1
-
-    /* 着色器 */
-    // VERTEX_SHADER 顶点着色器
-    // glCreateShader函数参数：要创建的着色器类型
-    unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-    glCompileShader(vertexShader);
-
-    // 检查着色器编译错误
-    int success; // 定义一个整型变量来表示是否成功编译
-    char infoLog[512]; // 储存错误消息
-    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-    // glGetShaderiv 检查是否编译成功。
-    // 如果编译失败则调用 glGetShaderInfoLog 获取错误消息，并且打印。
-    if (!success)
-    {
-        glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-        std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
-    }
-
-    // FRAGMENT_SHADER 片段着色器
-    unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-    glCompileShader(fragmentShader);
-
-    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-    if (!success) {
-        glGetProgramInfoLog(fragmentShader, 512, NULL, infoLog);
-        std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
-    }
-
-    // 着色器程序对象
-    unsigned int shaderProgram = glCreateProgram();
-    glAttachShader(shaderProgram, vertexShader);
-    glAttachShader(shaderProgram, fragmentShader);
-    glLinkProgram(shaderProgram);
-
-    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-    if(!success) {
-        glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-        std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
-    }
-
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
-    
-    glUseProgram(shaderProgram);
-
-    /*  把顶点数据链接到顶点着色器的顶点属性上 */
 
     /* 渲染循环(Render Loop) */
     // glfwWindowShouldClose 检查一次GLFW是否被要求退出
@@ -195,10 +127,12 @@ int main(){
         // 上面两种函数起到的作用也可以用 glClearBufferfv 来现实
         /*GLfloat color[] = {0.2, 0.3, 0.3, 1.0};
         glClearBufferfv(GL_COLOR, 0, color);*/
-
+        float offset = -1.0f;
+        ourShader.setFloat("x_offset", offset);
+        ourShader.use();
         glBindVertexArray(VAOs[0]);
         glDrawArrays(GL_TRIANGLES, 0, 3);
-        
+
         // glfwSwapBuffers 交换颜色缓冲，用来绘制并作为输出显示在屏幕
         glfwSwapBuffers(window);
         // glfwPollEvents 检查是否有触发事件
@@ -208,7 +142,6 @@ int main(){
     // 可选：一旦所有资源超出其用途，则取消分配：
     glDeleteVertexArrays(2, VAOs);
     glDeleteBuffers(2, VBOs);
-    glDeleteProgram(shaderProgram);
 
     glfwTerminate();
 
