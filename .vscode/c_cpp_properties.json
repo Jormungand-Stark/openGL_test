@@ -3,11 +3,7 @@
         {
             "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/**",
-                "/Users/jormungand/code/OpenGL_Test/glfw-3.3.7.bin.MACOS/include",
-                "/Users/jormungand/code/OpenGL_Test/glad/include",
-                "${default}",
-                "/Users/jormungand/code/OpenGL_Test/include"
+                "${workspaceFolder}/**"
             ],
             "defines": [],
             "macFrameworkPath": [

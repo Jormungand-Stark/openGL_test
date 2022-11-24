@@ -11,10 +11,11 @@
 		3D42B05E2921F75A00CC640C /* red_green_blue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D42B0592921F75A00CC640C /* red_green_blue.cpp */; };
 		3D42B05F2921F75A00CC640C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D42B05A2921F75A00CC640C /* main.cpp */; };
 		3D42B06A2921FAE700CC640C /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D42B0692921FAE700CC640C /* glad.c */; };
-		3D42B06F2922149000CC640C /* libglfw.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D42B0632921F99E00CC640C /* libglfw.3.dylib */; };
 		3D42B0712922164300CC640C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D42B0702922164300CC640C /* Cocoa.framework */; };
 		3D42B0732922164800CC640C /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D42B0722922164800CC640C /* IOKit.framework */; };
 		3D43247428D021040055F4C1 /* stb_image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D43247328D021040055F4C1 /* stb_image.cpp */; };
+		3D8D736F2927A76900322162 /* transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D8D736E2927A76900322162 /* transform.cpp */; };
+		3D8D73772927AAD700322162 /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D8D73762927AAD700322162 /* libglfw3.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,6 +42,8 @@
 		3D43246F28D01D440055F4C1 /* stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		3D43247328D021040055F4C1 /* stb_image.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = stb_image.cpp; sourceTree = "<group>"; };
 		3D721BD328B613DF002C8CAF /* OpenGL_Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OpenGL_Test; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D8D736E2927A76900322162 /* transform.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = transform.cpp; sourceTree = "<group>"; };
+		3D8D73762927AAD700322162 /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = "3rdParty/glfw-3.3.7.bin.MACOS/lib-arm64/libglfw3.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +53,7 @@
 			files = (
 				3D42B0732922164800CC640C /* IOKit.framework in Frameworks */,
 				3D42B0712922164300CC640C /* Cocoa.framework in Frameworks */,
-				3D42B06F2922149000CC640C /* libglfw.3.dylib in Frameworks */,
+				3D8D73772927AAD700322162 /* libglfw3.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +66,7 @@
 				3D42B0582921F75A00CC640C /* test.cpp */,
 				3D42B0592921F75A00CC640C /* red_green_blue.cpp */,
 				3D42B05A2921F75A00CC640C /* main.cpp */,
+				3D8D736E2927A76900322162 /* transform.cpp */,
 			);
 			path = Src;
 			sourceTree = "<group>";
@@ -123,6 +127,7 @@
 		3D721CD928B62E1B002C8CAF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3D8D73762927AAD700322162 /* libglfw3.a */,
 				3D42B0722922164800CC640C /* IOKit.framework */,
 				3D42B0702922164300CC640C /* Cocoa.framework */,
 				3D42B0632921F99E00CC640C /* libglfw.3.dylib */,
@@ -192,6 +197,7 @@
 				3D42B05D2921F75A00CC640C /* test.cpp in Sources */,
 				3D42B05F2921F75A00CC640C /* main.cpp in Sources */,
 				3D42B05E2921F75A00CC640C /* red_green_blue.cpp in Sources */,
+				3D8D736F2927A76900322162 /* transform.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

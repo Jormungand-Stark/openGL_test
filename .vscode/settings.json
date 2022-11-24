@@ -50,5 +50,6 @@
         "type_traits": "cpp",
         "typeinfo": "cpp",
         "variant": "cpp"
-    }
+    },
+    "cmake.sourceDirectory": "${workspaceFolder}/3rdParty/glm/test/gtx"
 }
