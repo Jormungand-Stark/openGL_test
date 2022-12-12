@@ -17,6 +17,7 @@
 		3D43247428D021040055F4C1 /* stb_image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D43247328D021040055F4C1 /* stb_image.cpp */; };
 		3D8D736F2927A76900322162 /* transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D8D736E2927A76900322162 /* transform.cpp */; };
 		3D8D73772927AAD700322162 /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D8D73762927AAD700322162 /* libglfw3.a */; };
+		3DD5E091293DFD5200D7AAAB /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DD5E090293DFD5200D7AAAB /* Camera.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,6 +47,7 @@
 		3D721BD328B613DF002C8CAF /* OpenGL_Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OpenGL_Test; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D8D736E2927A76900322162 /* transform.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = transform.cpp; sourceTree = "<group>"; };
 		3D8D73762927AAD700322162 /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = "3rdParty/glfw-3.3.7.bin.MACOS/lib-arm64/libglfw3.a"; sourceTree = "<group>"; };
+		3DD5E090293DFD5200D7AAAB /* Camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				3D42B05A2921F75A00CC640C /* main.cpp */,
 				3D8D736E2927A76900322162 /* transform.cpp */,
 				3D03797E293B86370054549E /* 3D.cpp */,
+				3DD5E090293DFD5200D7AAAB /* Camera.cpp */,
 			);
 			path = Src;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 				3D43247428D021040055F4C1 /* stb_image.cpp in Sources */,
 				3D42B05D2921F75A00CC640C /* test.cpp in Sources */,
 				3D42B05F2921F75A00CC640C /* main.cpp in Sources */,
+				3DD5E091293DFD5200D7AAAB /* Camera.cpp in Sources */,
 				3D42B05E2921F75A00CC640C /* red_green_blue.cpp in Sources */,
 				3D8D736F2927A76900322162 /* transform.cpp in Sources */,
 				3D03797F293B86370054549E /* 3D.cpp in Sources */,
