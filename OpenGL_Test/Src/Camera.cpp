@@ -16,22 +16,18 @@
 #include "../Texture/stb_image.h"
 
 #include "../Shader/Shader.h"
+#include "../Camera/Camera.h"
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
 float mixValue = 0.2f;
 
-glm::vec3 cameraPos   = glm::vec3(0.0f, 0.0f,  3.0f); // 位置
-glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f); // 同z负轴的方向向量
-glm::vec3 cameraUp    = glm::vec3(0.0f, 1.0f,  0.0f); // 上向量
-
+// camera
+Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+float lastX =  SCR_WIDTH / 2.0;
+float lastY =  SCR_HEIGHT / 2.0;
 bool firstMouse = true;
-float yaw   = -90.0f;    // 当俯仰角和偏航角都为0时，摄像机方向是指向X轴正方向的，因此需要设偏航角为-90，摄像机方向才能指向z轴负方向，与上述一致。
-float pitch =  0.0f;
-float lastX =  800.0f / 2.0;
-float lastY =  600.0 / 2.0;
-float fov   =  45.0f;
 
 float deltaTime = 0.0f; // 当前帧与上一帧的时间差
 float lastFrame = 0.0f; // 上一帧的时间
@@ -61,17 +57,15 @@ void processInput(GLFWwindow *window)
     float currentFrame = glfwGetTime();
     deltaTime = currentFrame - lastFrame;
     lastFrame = currentFrame;
-    float cameraSpeed = 25.0f * deltaTime; // adjust accordingly
-        // 如果希望向前/向后移动，就把位置向量加上/减去负方向向量。
-        if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-            cameraPos += cameraSpeed * cameraFront;
-        if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-            cameraPos -= cameraSpeed * cameraFront;
-        // 如果希望向左/右移动，使用叉乘来创建一个右向量(Right Vector)，并加上/减去右向量。
-        if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-            cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
-        if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-            cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+    
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+        camera.ProcessKeyboard(FORWARD, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+        camera.ProcessKeyboard(BACKWARD, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+        camera.ProcessKeyboard(LEFT, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+        camera.ProcessKeyboard(RIGHT, deltaTime);
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
@@ -97,44 +91,18 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
     /** 1.计算鼠标自上一帧的偏移量 **/
     float xoffset = xpos - lastX;
     float yoffset = lastY - ypos; // 注意这里是相反的，因为y坐标是从底部往顶部依次增大的
+//    float yoffset = ypos - lastY; // 这种写法会影响y轴，鼠标向下图像会向上，反之亦然。
     lastX = xpos;
     lastY = ypos;
 
-    float sensitivity = 0.1f; // 灵敏度，用来调节鼠标移动幅度
-    xoffset *= sensitivity;
-    yoffset *= sensitivity;
-
-    /** 2.把偏移量添加到摄像机的俯仰角和偏航角中 **/
-    yaw += xoffset;
-    pitch += yoffset;
-
-    /** 3.对偏航角和俯仰角进行最大和最小值的限制 **/
-    // 对于俯仰角，要让用户不能看向高于89度的地方
-    // 在90度时视角会发生逆转，所以把89度作为极限
-    // 同样也不允许小于-89度。这样能够保证用户只能看到天空或脚下
-    if (pitch > 89.0f)
-        pitch = 89.0f;
-    if (pitch < -89.0f)
-        pitch = -89.0f;
-
-    /** 4.计算方向向量 **/
-    glm::vec3 front;
-    front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-    front.y = sin(glm::radians(pitch));
-    front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-    cameraFront = glm::normalize(front);
+    camera.ProcessMouseMovement(xoffset, yoffset);
 }
 
 // glfw: whenever the mouse scroll wheel scrolls, this callback is called
 // ----------------------------------------------------------------------
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-    std::cout << "scroll_callback" << std::endl;
-    fov -= (float)yoffset;
-    if (fov < 1.0f)
-        fov = 1.0f;
-    if (fov > 45.0f)
-        fov = 45.0f;
+    camera.ProcessMouseScroll(static_cast<float>(yoffset));
 }
 
 int main(){
@@ -344,7 +312,7 @@ int main(){
 //        float camZ = cos(glfwGetTime()) * radius;
 //        glm::mat4 view = glm::lookAt(glm::vec3(camX, 0.0, camZ), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
         // 2.通过 WASD 移动摄像机
-        glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+        glm::mat4 view = camera.GetViewMatrix();
         // ourShader.setMat4("view", view); 与下面的行为等价
         // 找到矩阵的 uniform locations
         unsigned int viewLoc = glGetUniformLocation(ourShader.ID, "view");

@@ -44,6 +44,7 @@
 		3D43246E28C9DED00055F4C1 /* Shader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shader.h; sourceTree = "<group>"; };
 		3D43246F28D01D440055F4C1 /* stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		3D43247328D021040055F4C1 /* stb_image.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = stb_image.cpp; sourceTree = "<group>"; };
+		3D69368929471BB300553DB4 /* Camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		3D721BD328B613DF002C8CAF /* OpenGL_Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OpenGL_Test; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D8D736E2927A76900322162 /* transform.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = transform.cpp; sourceTree = "<group>"; };
 		3D8D73762927AAD700322162 /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = "3rdParty/glfw-3.3.7.bin.MACOS/lib-arm64/libglfw3.a"; sourceTree = "<group>"; };
@@ -102,6 +103,14 @@
 			path = Shader;
 			sourceTree = "<group>";
 		};
+		3D69368829471B9100553DB4 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				3D69368929471BB300553DB4 /* Camera.h */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
 		3D721BCA28B613DF002C8CAF = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +131,7 @@
 		3D721BD528B613DF002C8CAF /* OpenGL_Test */ = {
 			isa = PBXGroup;
 			children = (
+				3D69368829471B9100553DB4 /* Camera */,
 				3D42B0682921FAE700CC640C /* glad */,
 				3D42B0572921F75A00CC640C /* Src */,
 				3D43247228D01E050055F4C1 /* Shader */,
