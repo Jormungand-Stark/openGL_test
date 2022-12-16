@@ -39,6 +39,9 @@ public:
     void setMat4(const std::string &name, glm::mat4 value) const{
         glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
     }
+    void setVec3(const std::string &name, float one, float two, float three) const{
+        glUniform3f(glGetUniformLocation(ID, name.c_str()), one, two, three);
+    }
 private:
     // 用于检查着色器编译/链接错误的实用程序函数
     void checkCompileErrors(unsigned int index, std::string type){

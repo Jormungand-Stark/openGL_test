@@ -18,6 +18,7 @@
 		3D8D736F2927A76900322162 /* transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D8D736E2927A76900322162 /* transform.cpp */; };
 		3D8D73772927AAD700322162 /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D8D73762927AAD700322162 /* libglfw3.a */; };
 		3DD5E091293DFD5200D7AAAB /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DD5E090293DFD5200D7AAAB /* Camera.cpp */; };
+		3DF5D1CA294C5969007BD2DA /* color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DF5D1C9294C5969007BD2DA /* color.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,6 +50,27 @@
 		3D8D736E2927A76900322162 /* transform.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = transform.cpp; sourceTree = "<group>"; };
 		3D8D73762927AAD700322162 /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = "3rdParty/glfw-3.3.7.bin.MACOS/lib-arm64/libglfw3.a"; sourceTree = "<group>"; };
 		3DD5E090293DFD5200D7AAAB /* Camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		3DF5D1C9294C5969007BD2DA /* color.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = color.cpp; sourceTree = "<group>"; };
+		3DF5D1CC294C66E3007BD2DA /* 5.1.transform.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = 5.1.transform.fs; sourceTree = "<group>"; };
+		3DF5D1CD294C66E3007BD2DA /* 1.colors.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = 1.colors.vs; sourceTree = "<group>"; };
+		3DF5D1CE294C66E3007BD2DA /* 5.2.transform.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = 5.2.transform.vs; sourceTree = "<group>"; };
+		3DF5D1CF294C66E3007BD2DA /* 4.2.texture.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = 4.2.texture.fs; sourceTree = "<group>"; };
+		3DF5D1D0294C66E3007BD2DA /* 1.light_cube.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = 1.light_cube.fs; sourceTree = "<group>"; };
+		3DF5D1D1294C66E3007BD2DA /* 3.3.shader.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = 3.3.shader.vs; sourceTree = "<group>"; };
+		3DF5D1D2294C66E3007BD2DA /* 6.1.transform.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = 6.1.transform.fs; sourceTree = "<group>"; };
+		3DF5D1D3294C66E3007BD2DA /* 4.1.texture.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = 4.1.texture.vs; sourceTree = "<group>"; };
+		3DF5D1D4294C66E3007BD2DA /* 6.2.transform.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = 6.2.transform.vs; sourceTree = "<group>"; };
+		3DF5D1D5294C66E3007BD2DA /* 4.2.texture.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = 4.2.texture.vs; sourceTree = "<group>"; };
+		3DF5D1D6294C66E3007BD2DA /* 1.light_cube.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = 1.light_cube.vs; sourceTree = "<group>"; };
+		3DF5D1D7294C66E3007BD2DA /* 4.1.texture.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = 4.1.texture.fs; sourceTree = "<group>"; };
+		3DF5D1D8294C66E3007BD2DA /* 6.2.transform.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = 6.2.transform.fs; sourceTree = "<group>"; };
+		3DF5D1D9294C66E3007BD2DA /* 6.1.transform.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = 6.1.transform.vs; sourceTree = "<group>"; };
+		3DF5D1DA294C66E3007BD2DA /* 3.3.shader.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = 3.3.shader.fs; sourceTree = "<group>"; };
+		3DF5D1DB294C66E3007BD2DA /* awesomeface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = awesomeface.png; sourceTree = "<group>"; };
+		3DF5D1DC294C66E3007BD2DA /* container.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = container.jpeg; sourceTree = "<group>"; };
+		3DF5D1DD294C66E3007BD2DA /* 5.2.transform.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = 5.2.transform.fs; sourceTree = "<group>"; };
+		3DF5D1DE294C66E3007BD2DA /* 1.colors.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = 1.colors.fs; sourceTree = "<group>"; };
+		3DF5D1DF294C66E3007BD2DA /* 5.1.transform.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = 5.1.transform.vs; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +96,7 @@
 				3D8D736E2927A76900322162 /* transform.cpp */,
 				3D03797E293B86370054549E /* 3D.cpp */,
 				3DD5E090293DFD5200D7AAAB /* Camera.cpp */,
+				3DF5D1C9294C5969007BD2DA /* color.cpp */,
 			);
 			path = Src;
 			sourceTree = "<group>";
@@ -114,6 +137,7 @@
 		3D721BCA28B613DF002C8CAF = {
 			isa = PBXGroup;
 			children = (
+				3DF5D1CB294C66E3007BD2DA /* material */,
 				3D721BD528B613DF002C8CAF /* OpenGL_Test */,
 				3D721BD428B613DF002C8CAF /* Products */,
 				3D721CD928B62E1B002C8CAF /* Frameworks */,
@@ -149,6 +173,33 @@
 				3D42B0632921F99E00CC640C /* libglfw.3.dylib */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3DF5D1CB294C66E3007BD2DA /* material */ = {
+			isa = PBXGroup;
+			children = (
+				3DF5D1CC294C66E3007BD2DA /* 5.1.transform.fs */,
+				3DF5D1CD294C66E3007BD2DA /* 1.colors.vs */,
+				3DF5D1CE294C66E3007BD2DA /* 5.2.transform.vs */,
+				3DF5D1CF294C66E3007BD2DA /* 4.2.texture.fs */,
+				3DF5D1D0294C66E3007BD2DA /* 1.light_cube.fs */,
+				3DF5D1D1294C66E3007BD2DA /* 3.3.shader.vs */,
+				3DF5D1D2294C66E3007BD2DA /* 6.1.transform.fs */,
+				3DF5D1D3294C66E3007BD2DA /* 4.1.texture.vs */,
+				3DF5D1D4294C66E3007BD2DA /* 6.2.transform.vs */,
+				3DF5D1D5294C66E3007BD2DA /* 4.2.texture.vs */,
+				3DF5D1D6294C66E3007BD2DA /* 1.light_cube.vs */,
+				3DF5D1D7294C66E3007BD2DA /* 4.1.texture.fs */,
+				3DF5D1D8294C66E3007BD2DA /* 6.2.transform.fs */,
+				3DF5D1D9294C66E3007BD2DA /* 6.1.transform.vs */,
+				3DF5D1DA294C66E3007BD2DA /* 3.3.shader.fs */,
+				3DF5D1DB294C66E3007BD2DA /* awesomeface.png */,
+				3DF5D1DC294C66E3007BD2DA /* container.jpeg */,
+				3DF5D1DD294C66E3007BD2DA /* 5.2.transform.fs */,
+				3DF5D1DE294C66E3007BD2DA /* 1.colors.fs */,
+				3DF5D1DF294C66E3007BD2DA /* 5.1.transform.vs */,
+			);
+			path = material;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DF5D1CA294C5969007BD2DA /* color.cpp in Sources */,
 				3D42B06A2921FAE700CC640C /* glad.c in Sources */,
 				3D43247428D021040055F4C1 /* stb_image.cpp in Sources */,
 				3D42B05D2921F75A00CC640C /* test.cpp in Sources */,
