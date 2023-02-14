@@ -27,7 +27,7 @@ const float YAW         = -90.0f; // 当俯仰角和偏航角都为0时，摄像
 const float PITCH       =  0.0f;
 const float SPEED       =  2.5f;
 const float SENSITIVITY =  0.1f;
-const float FOV        =  45.0f;
+const float FOV         =  45.0f;
 
 // 抽象的相机类
 class Camera
@@ -84,7 +84,7 @@ public:
             Position -= Right * velocity;
         if (direction == RIGHT)
             Position += Right * velocity;
-        Position.y = 0;
+//        Position.y = 0;
     }
 
     // 处理鼠标的输入

@@ -15,6 +15,7 @@
 		3D42B0712922164300CC640C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D42B0702922164300CC640C /* Cocoa.framework */; };
 		3D42B0732922164800CC640C /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D42B0722922164800CC640C /* IOKit.framework */; };
 		3D43247428D021040055F4C1 /* stb_image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D43247328D021040055F4C1 /* stb_image.cpp */; };
+		3D7A47EC29963FEE001EF49F /* light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7A47EA29963FEE001EF49F /* light.cpp */; };
 		3D8D736F2927A76900322162 /* transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D8D736E2927A76900322162 /* transform.cpp */; };
 		3D8D73772927AAD700322162 /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D8D73762927AAD700322162 /* libglfw3.a */; };
 		3DD5E091293DFD5200D7AAAB /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DD5E090293DFD5200D7AAAB /* Camera.cpp */; };
@@ -47,8 +48,11 @@
 		3D43247328D021040055F4C1 /* stb_image.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = stb_image.cpp; sourceTree = "<group>"; };
 		3D69368929471BB300553DB4 /* Camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		3D721BD328B613DF002C8CAF /* OpenGL_Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OpenGL_Test; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D7A47EA29963FEE001EF49F /* light.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = light.cpp; sourceTree = "<group>"; };
 		3D8D736E2927A76900322162 /* transform.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = transform.cpp; sourceTree = "<group>"; };
 		3D8D73762927AAD700322162 /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = "3rdParty/glfw-3.3.7.bin.MACOS/lib-arm64/libglfw3.a"; sourceTree = "<group>"; };
+		3DCD3BA9299A2A5500C08568 /* 2.1.basic_lighting.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = 2.1.basic_lighting.vs; sourceTree = "<group>"; };
+		3DCD3BAA299A2A5500C08568 /* 2.1.basic_lighting.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = 2.1.basic_lighting.fs; sourceTree = "<group>"; };
 		3DD5E090293DFD5200D7AAAB /* Camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		3DF5D1C9294C5969007BD2DA /* color.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = color.cpp; sourceTree = "<group>"; };
 		3DF5D1CC294C66E3007BD2DA /* 5.1.transform.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = 5.1.transform.fs; sourceTree = "<group>"; };
@@ -97,6 +101,7 @@
 				3D03797E293B86370054549E /* 3D.cpp */,
 				3DD5E090293DFD5200D7AAAB /* Camera.cpp */,
 				3DF5D1C9294C5969007BD2DA /* color.cpp */,
+				3D7A47EA29963FEE001EF49F /* light.cpp */,
 			);
 			path = Src;
 			sourceTree = "<group>";
@@ -178,6 +183,8 @@
 		3DF5D1CB294C66E3007BD2DA /* material */ = {
 			isa = PBXGroup;
 			children = (
+				3DCD3BAA299A2A5500C08568 /* 2.1.basic_lighting.fs */,
+				3DCD3BA9299A2A5500C08568 /* 2.1.basic_lighting.vs */,
 				3DF5D1CC294C66E3007BD2DA /* 5.1.transform.fs */,
 				3DF5D1CD294C66E3007BD2DA /* 1.colors.vs */,
 				3DF5D1CE294C66E3007BD2DA /* 5.2.transform.vs */,
@@ -267,6 +274,7 @@
 				3DD5E091293DFD5200D7AAAB /* Camera.cpp in Sources */,
 				3D42B05E2921F75A00CC640C /* red_green_blue.cpp in Sources */,
 				3D8D736F2927A76900322162 /* transform.cpp in Sources */,
+				3D7A47EC29963FEE001EF49F /* light.cpp in Sources */,
 				3D03797F293B86370054549E /* 3D.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
